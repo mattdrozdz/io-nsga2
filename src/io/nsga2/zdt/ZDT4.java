@@ -9,7 +9,7 @@ public class ZDT4 implements Problem<Double> {
 	@Override
     public void evaluateSolution(Solution<Double> solution) {
 	    double[] f = new double[solution.getObjectivesNumber()];
-	    f[0] = evaluateF1(solution.getAttribute(0));
+	    f[0] = evaluateF1(solution.getVariableValue(0));
 	    double g = evaluateG(solution);
 	    double h = evaluateH(f[0], g);
 	    f[1] = h * g;
@@ -28,7 +28,7 @@ public class ZDT4 implements Problem<Double> {
     private Double evaluateG(Solution<Double> solution) {
     	double g = 1 + 10 * (solution.getDecisionVariablesNumber() - 1);
     	for (int i = 1; i < solution.getDecisionVariablesNumber(); i++) {
-    		double v =  Math.pow(solution.getAttribute(i), 2) - 10*Math.cos(4*Math.PI*solution.getAttribute(i));
+    		double v =  Math.pow(solution.getVariableValue(i), 2) - 10*Math.cos(4*Math.PI*solution.getVariableValue(i));
     		g += v;
     	}
         return (9. / (solution.getDecisionVariablesNumber() - 1)) * g + 1.0;

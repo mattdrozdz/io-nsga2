@@ -1,6 +1,7 @@
 package io.nsga2;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import io.nsga2.sorting.DominanceSorter;
 import io.nsga2.zdt.ZDT1;
 
 import java.util.ArrayList;
@@ -12,9 +13,11 @@ import java.util.Random;
  */
 public class Main {
 
-    private static int populationSize;
-    private static int iterationsNumber;
-    private static int attributesNumber;
+    private static int populationSize = 20;
+    private static int iterationsNumber = 10;
+    
+    private static int objectivesNumber = 2;
+    private static int variablesNumber = 10;
 
     public static void main(String[] args) {
 
@@ -66,16 +69,22 @@ public class Main {
     }
 
     private static DoubleSolution createRandomSolution() {
-        DoubleSolution solution = new DoubleSolution(attributesNumber);
+        DoubleSolution solution = new DoubleSolution(variablesNumber, objectivesNumber);
         Random random = new Random();
-        for (int i=0; i<attributesNumber; i++) {
-            solution.setAttribute(i, random.nextDouble());
+        for (int i=0; i<variablesNumber; i++) {
+            solution.setVariableValue(i, random.nextDouble());
         }
         return solution;
     }
 
     private static List<DoubleSolution> nondominatedSort(List<DoubleSolution> population) {
-        throw new NotImplementedException();
+    	DominanceSorter sorter = new DominanceSorter();
+    	List<ArrayList<DoubleSolution>> sort = sorter.sort(population);
+		List<DoubleSolution> sortedPopulation = new ArrayList();
+		for (ArrayList<DoubleSolution> arrayList : sort) {
+			sortedPopulation.addAll(arrayList);
+		}
+		return sortedPopulation;
     }
 
     private static List<DoubleSolution> createOffspringPopulation(List<DoubleSolution> population) {

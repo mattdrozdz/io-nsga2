@@ -7,27 +7,30 @@ import java.util.List;
  * Created by Mateusz Drożdż on 11.11.15.
  */
 public class DoubleSolution implements Solution<Double> {
-    private final List<Double> attributes;
+    private final List<Double> decisionVariables;
     private final int objectivesNumber;
     private final Double[] objectives;
 
     private int rank;
     private Double distance;
 
-    public DoubleSolution(int objectivesNumber) {
-        this.attributes = new ArrayList<Double>();
+    public DoubleSolution(int variablesNumber, int objectivesNumber) {
+        this.decisionVariables = new ArrayList<Double>(variablesNumber);
+        for (int i = 0; i < variablesNumber; i++) {
+        	decisionVariables.add(0.0);
+        }
         this.objectivesNumber = objectivesNumber;
         this.objectives = new Double[objectivesNumber];
     }
 
     @Override
-    public void setAttribute(int index, Double value) {
-        attributes.set(index, value);
+    public void setVariableValue(int index, Double value) {
+        decisionVariables.set(index, value);
     }
 
     @Override
-    public Double getAttribute(int index) {
-        return attributes.get(index);
+    public Double getVariableValue(int index) {
+        return decisionVariables.get(index);
     }
 
     @Override
@@ -62,7 +65,7 @@ public class DoubleSolution implements Solution<Double> {
 
 	@Override
 	public int getDecisionVariablesNumber() {
-		return attributes.size();
+		return decisionVariables.size();
 	}
 
 	@Override
