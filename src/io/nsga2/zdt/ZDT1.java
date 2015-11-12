@@ -42,4 +42,8 @@ public class ZDT1 implements Problem<Double> {
     	h = 1.0 - Math.sqrt(f1 / g);
     	return h;
     }
+    
+    public double getIdealParetoFront(double x) {
+    	return 1 - Math.sqrt(x);
+    }
 }

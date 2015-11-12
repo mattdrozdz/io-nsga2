@@ -39,4 +39,8 @@ public class ZDT3 implements Problem<Double> {
     	h = 1.0 - Math.sqrt(f1 / g) - f1/g * Math.sin(10 * Math.PI * f1);
     	return h;
     }
+    
+    public double getIdealParetoFront(double x) {
+    	return 1 - Math.sqrt(x) - x * Math.sin(10*Math.PI*x);
+    }
 }

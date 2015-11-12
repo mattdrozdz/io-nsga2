@@ -39,4 +39,8 @@ public class ZDT2 implements Problem<Double> {
     	h = 1.0 - Math.pow((f1 / g), 2);
     	return h;
     }
+    
+    public double getIdealParetoFront(double x) {
+    	return 1 - Math.pow(x, 2);
+    }
 }
