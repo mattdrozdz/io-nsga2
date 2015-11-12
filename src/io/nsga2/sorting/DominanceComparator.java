@@ -26,6 +26,7 @@ public class DominanceComparator implements Comparator<Solution> {
 		for (int i = 0; i < solution1.getObjectivesNumber(); i++) {
 			value1 = solution1.getObjective(i);
 			value2 = solution2.getObjective(i);
+			// wedlug definicji 1.2
 			if (value1 / (1 + epsilon) < value2) {
 				flag = -1;
 			} else if (value2 / (1 + epsilon) < value1) {

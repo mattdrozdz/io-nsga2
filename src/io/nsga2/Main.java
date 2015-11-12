@@ -7,6 +7,7 @@ import io.nsga2.zdt.ZDT1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 /**
  * Created by Mateusz Drożdż on 11.11.15.
@@ -92,7 +93,7 @@ public class Main {
     }
 
     private static List<DoubleSolution> getFront(List<DoubleSolution> union, int frontId) {
-        throw new NotImplementedException();
+        return union.stream().filter(solution -> solution.getFront() == frontId).collect(Collectors.toList());
     }
 
     private static List<DoubleSolution> crowdingSort(List<DoubleSolution> front) {

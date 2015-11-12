@@ -51,6 +51,7 @@ public class DominanceSorter {
 		for (int i = 0; i < population.size(); i++) {
 			if (dominateMe[i] == 0) {
 				front[0].add(i);
+				population.get(i).setFront(0);
 			}
 		}
 
@@ -67,6 +68,7 @@ public class DominanceSorter {
 					dominateMe[index]--;
 					if (dominateMe[index] == 0) {
 						front[i].add(index);
+						population.get(index).setFront(i);
 					}
 				}
 			}

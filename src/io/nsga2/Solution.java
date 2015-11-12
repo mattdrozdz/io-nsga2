@@ -13,8 +13,8 @@ public interface Solution<T> {
     Double getObjective(int index);
     int getObjectivesNumber();
 
-    void setRank(int rank);
-    int getRank();
+    void setFront(int rank);
+    int getFront();
     void setDistance(Double distance);
     Double getDistance();
 }

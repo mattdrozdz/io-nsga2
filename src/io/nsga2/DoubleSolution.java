@@ -11,7 +11,7 @@ public class DoubleSolution implements Solution<Double> {
     private final int objectivesNumber;
     private final Double[] objectives;
 
-    private int rank;
+    private int front;
     private Double distance;
 
     public DoubleSolution(int variablesNumber, int objectivesNumber) {
@@ -44,13 +44,13 @@ public class DoubleSolution implements Solution<Double> {
     }
 
     @Override
-    public void setRank(int rank) {
-        this.rank = rank;
+    public void setFront(int rank) {
+        this.front = rank;
     }
 
     @Override
-    public int getRank() {
-        return rank;
+    public int getFront() {
+        return front;
     }
 
     @Override
