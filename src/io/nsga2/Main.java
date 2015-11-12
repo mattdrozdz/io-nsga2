@@ -1,13 +1,16 @@
 package io.nsga2;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import io.nsga2.sorting.CrowdSort;
 import io.nsga2.sorting.DominanceSorter;
 import io.nsga2.zdt.ZDT1;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Created by Mateusz Drożdż on 11.11.15.
@@ -45,6 +48,10 @@ public class Main {
             int frontId = 0;
             while (remaining > 0) {
                 List<DoubleSolution> front = getFront(union, frontId);
+                if (front.isEmpty()) {
+                	break;
+                }
+                
                 if (front.size() > remaining) {
                     front = crowdingSort(front);
                     nextPopulation.addAll(front.subList(0, remaining));
@@ -53,6 +60,7 @@ public class Main {
                     nextPopulation.addAll(front);
                     remaining -= front.size();
                 }
+                frontId++;
             }
 
             population = nextPopulation;
@@ -89,7 +97,8 @@ public class Main {
     }
 
     private static List<DoubleSolution> createOffspringPopulation(List<DoubleSolution> population) {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+    	return Collections.EMPTY_LIST;
     }
 
     private static List<DoubleSolution> getFront(List<DoubleSolution> union, int frontId) {
@@ -97,6 +106,9 @@ public class Main {
     }
 
     private static List<DoubleSolution> crowdingSort(List<DoubleSolution> front) {
-        throw new NotImplementedException();
+        CrowdSort cs = new CrowdSort();
+        cs.computeDensityEstimator(front);
+        cs.sort(front);
+		return front;
     }
 }
