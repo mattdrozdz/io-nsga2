@@ -36,6 +36,9 @@ public class Main {
         for (int iteration=0; iteration < iterationsNumber; iteration++) {
             population = nondominatedSort(population);
             List<DoubleSolution> offspringPopulation = createOffspringPopulation(population);
+            for (DoubleSolution solution : offspringPopulation) {
+                problem.evaluateSolution(solution);
+            }
 
             List<DoubleSolution> union = new ArrayList<DoubleSolution>();
             union.addAll(population);
@@ -97,8 +100,14 @@ public class Main {
     }
 
     private static List<DoubleSolution> createOffspringPopulation(List<DoubleSolution> population) {
-        //throw new NotImplementedException();
-    	return Collections.EMPTY_LIST;
+        List<DoubleSolution> offspringPopulation = new ArrayList<>(population.size());
+        for (int i=0; i<(populationSize / 2); i++) {
+            List<DoubleSolution> parents = Operators.selection(population);
+            List<DoubleSolution> offspring = Operators.crossover(parents);
+            offspring.forEach(Operators::mutation);
+            offspringPopulation.addAll(offspring);
+        }
+    	return offspringPopulation;
     }
 
     private static List<DoubleSolution> getFront(List<DoubleSolution> union, int frontId) {
