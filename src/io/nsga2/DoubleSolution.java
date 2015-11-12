@@ -59,4 +59,14 @@ public class DoubleSolution implements Solution<Double> {
     public Double getDistance() {
         return distance;
     }
+
+	@Override
+	public int getDecisionVariablesNumber() {
+		return attributes.size();
+	}
+
+	@Override
+	public int getObjectivesNumber() {
+		return objectivesNumber;
+	}
 }
