@@ -10,7 +10,7 @@ import java.util.*;
 public class Operators {
 
     private static final double distributionIndex = 2;
-    private static final double crossoverProbability = 0.5;
+    private static final double mutationProbability = 1.0;
 
     /**
      * @return two randomly selected solutions
@@ -28,14 +28,15 @@ public class Operators {
         if (parents.size() != 2) {
             throw new IllegalStateException("There must be two parents instead of " + parents.size());
         }
-        throw new NotImplementedException();
+        return doCrossover(parents.get(0), parents.get(1));
     }
 
     public static DoubleSolution mutation(DoubleSolution solution) {
-        throw new NotImplementedException();
+        doMutation(mutationProbability, solution);
+        return solution;
     }
 
-    private static List<DoubleSolution> doCrossover(double probability, DoubleSolution parent1, DoubleSolution parent2) {
+    private static List<DoubleSolution> doCrossover(DoubleSolution parent1, DoubleSolution parent2) {
         if (parent1.getDecisionVariablesNumber() != parent2.getDecisionVariablesNumber()) {
             throw new IllegalStateException("Parents with different DecisionVariablesNumber");
         }
@@ -66,5 +67,30 @@ public class Operators {
         }
 
         return Arrays.asList(child1, child2);
+    }
+
+    /**
+     * https://books.google.pl/books?id=OSTn4GSy2uQC&pg=PA124&dq=Polynomial+mutation+algorithm&hl=pl&sa=X&ved=0CB8Q6AEwAGoVChMI3sieuMyLyQIVS9UsCh0YwAwj#v=onepage&q=Polynomial%20mutation%20algorithm&f=false
+     */
+    private static void doMutation(double probability, DoubleSolution solution) {
+
+        for (int i=0; i<solution.getDecisionVariablesNumber(); i++) {
+            Random random = new Random(System.currentTimeMillis());
+            if (random.nextDouble() < probability) {
+                double y = solution.getVariableValue(i);
+                double deltaY = 0.0;
+                double mutPow = 1.0 / (distributionIndex + 1.0);
+                double r = random.nextDouble();
+                if (r < 0.5) {
+                    deltaY = Math.pow(2.0 * r, mutPow) - 1.0;
+                } else {
+                    deltaY = 1.0 - Math.pow(2.0 - 2.0 * r, mutPow);
+                }
+
+                y += deltaY;
+                solution.setVariableValue(i, y);
+            }
+        }
+
     }
 }
