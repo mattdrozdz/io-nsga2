@@ -69,6 +69,10 @@ public class NGSA_II {
 		for (DoubleSolution doubleSolution : population) {
 			System.out.println(doubleSolution);
 		}
+
+
+		System.out.println("HV: " + Hypervolume.hv(population));
+		System.out.println("HVR (ZDT1): " + Hypervolume.hvrZDT1(population));
 	}
 
 	private static List<DoubleSolution> createRandomPopulation(int populationSize) {
