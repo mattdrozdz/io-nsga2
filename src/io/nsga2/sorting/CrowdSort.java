@@ -35,8 +35,8 @@ public class CrowdSort {
 			return;
 		}
 
-		List<Solution> front = new ArrayList<>(size);
-		for (Solution solution : solutionList) {
+		List<Solution<Double>> front = new ArrayList<>(size);
+		for (Solution<Double> solution : solutionList) {
 			front.add(solution);
 		}
 

@@ -15,6 +15,7 @@ public class ZDT1 implements Problem<Double> {
 	    f[0] = evaluateF1(solution.getVariableValue(0));
 	    double g = evaluateG(solution);
 	    double h = evaluateH(f[0], g);
+	    
 	    f[1] = h * g;
 
 	    solution.setObjective(0, f[0]);

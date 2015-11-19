@@ -1,8 +1,10 @@
 package io.nsga2;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Mateusz Drożdż on 12.11.15.
@@ -10,7 +12,7 @@ import java.util.*;
 public class Operators {
 
     private static final double distributionIndex = 2;
-    private static final double mutationProbability = 1.0;
+    private static final double mutationProbability = 0.4;
 
     /**
      * @return two randomly selected solutions
@@ -62,8 +64,23 @@ public class Operators {
             double childX1 = 0.5 * ((1.0 + beta) * x1 + (1 - beta) * x2);
             double childX2 = 0.5 * ((1.0 - beta) * x1 + (1.0 + beta) * x2);
 
-            child1.setVariableValue(i, childX1);
-            child2.setVariableValue(i, childX2);
+            if(childX1 > 1) {
+            	childX1 = 1;
+            }
+            
+            if(childX1 < 0) {
+            	childX1 = 0;
+            }
+            
+            if (childX2 > 1) {
+            	childX2 = 1;
+            }
+            
+            if(childX2 < 0) {
+            	childX2 = 0;
+            }
+            child1.setVariableValue(i, Double.valueOf(childX1));
+            child2.setVariableValue(i, Double.valueOf(childX2));
         }
 
         return Arrays.asList(child1, child2);
@@ -84,11 +101,17 @@ public class Operators {
                 if (r < 0.5) {
                     deltaY = Math.pow(2.0 * r, mutPow) - 1.0;
                 } else {
-                    deltaY = 1.0 - Math.pow(2.0 - 2.0 * r, mutPow);
+					deltaY = 1.0 - Math.pow(2.0 - 2.0 * r, mutPow);
                 }
 
                 y += deltaY;
-                solution.setVariableValue(i, y);
+                if (y > 1) {
+                	y = 1;
+                }
+                if (y < 0) {
+                	y = 0;
+                }
+                solution.setVariableValue(i, Double.valueOf(y));
             }
         }
 

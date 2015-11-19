@@ -7,7 +7,7 @@ import java.util.Comparator;
 @SuppressWarnings({ "rawtypes" })
 public class DominanceComparator implements Comparator<Solution> {
 
-	private double epsilon = 0.01;
+	private double epsilon = 0.001;
 
 	/**
 	 * Compares two solutions.
