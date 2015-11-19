@@ -9,8 +9,8 @@ import java.util.*;
  */
 public class Operators {
 
-    private static final double distributionIndex = 2;
-    private static final double mutationProbability = 1.0;
+    private static final double distributionIndex = 2.0;
+    private static final double mutationProbability = 0.5;
 
     /**
      * @return two randomly selected solutions
@@ -50,16 +50,16 @@ public class Operators {
 //          step 1
             double u = random.nextDouble();
 //          step 2
-            double beta = 0;
+            double beta = 0.0;
             if (u < 0.5) {
-                beta = Math.pow(2.0*u, 1/(distributionIndex + 1));
+                beta = Math.pow(2.0*u, 1.0/(distributionIndex + 1));
             } else if (u < 0.5) {
                 beta = Math.pow(0.5 / (1.0 - u), 1.0 / (distributionIndex + 1));
             } else if (u == 0.5) {
                 beta = 1.0;
             }
 //          step 3
-            double childX1 = 0.5 * ((1.0 + beta) * x1 + (1 - beta) * x2);
+            double childX1 = 0.5 * ((1.0 + beta) * x1 + (1.0 - beta) * x2);
             double childX2 = 0.5 * ((1.0 - beta) * x1 + (1.0 + beta) * x2);
 
             child1.setVariableValue(i, childX1);
